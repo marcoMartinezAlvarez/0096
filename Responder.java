@@ -28,7 +28,7 @@ public class Responder
         responses.add("Espere se esta arreglando");
         responses.add("El equipo se ha arreglado perfectamente");
         responses.add("Muchas gracias por confiar en nosotros¡¡¡");
-        
+
         responsesOfImput.put("android","funciona perfectamente reinicie el sistema");
         responsesOfImput.put("simbian" ,"el sistema operativo se ha caido... reparando");
         responsesOfImput.put("windowsPhone" ,"el sistema se esta actualizando");
@@ -41,16 +41,27 @@ public class Responder
      */
     public String generateResponse( HashSet <String> userInput)
     {
-       String response = null;
-       String userInputString= "";
-       for(String elemento: userInput){
-        userInputString = elemento;
+        String response = null;
+        Iterator <String> iterator = userInput.iterator();
+        boolean search = true;
+        while(iterator.hasNext() && search){
+            response = responsesOfImput.get(iterator.next());
+             if(response != null){
+                search = false;
+                }
+      
         }
-       response = responsesOfImput.get(userInputString);
-       
-       if(response == null){
-        
-           response = responses.get(aleatorio.nextInt(responses.size()));
+        for(String element: userInput){
+            if(response == null){
+                response = responsesOfImput.get(element);
+               
+            }
+
+        }
+
+        if(response == null){
+
+            response = responses.get(aleatorio.nextInt(responses.size()));
         }
         return response;
     }
