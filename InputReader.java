@@ -28,9 +28,10 @@ public class InputReader
      */
     public String getInput()
     {
-        System.out.print("> ");         // print prompt
+        System.out.print("> ");         //print prompt
         String inputLine = reader.nextLine();
+        inputLine.length();
 
-        return inputLine;
+        return inputLine.split(" ")[0];
     }
 }
