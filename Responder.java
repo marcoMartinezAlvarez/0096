@@ -54,9 +54,15 @@ public class Responder
         String response = null;
         response = responsesOfImput.get(userInput);
         
-        if(response == null){
-            response = responses.get(aleatorio.nextInt(responses.size()));
-        }
+       
+        
+        if(responses.size() > 0){
+            int numeroAleatorio = aleatorio.nextInt(responses.size());
+            response = responses.remove(numeroAleatorio); 
+        }else{
+            response = "No se ha entendido la frase del usuario";
+        }  
+    
         return response;
     }
 }
