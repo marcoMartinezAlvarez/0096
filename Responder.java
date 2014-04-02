@@ -14,53 +14,47 @@ public class Responder
 {
     Random aleatorio;
     ArrayList <String> responses;
-    HashMap <String, String> responsesOfImput;
+    HashMap <HashSet <String>, String> responsesOfImput;
+    HashSet <String> coincident1;
+    HashSet <String> coincident2;
     /**
      * Construct a Responder - nothing to do
      */
     public Responder()
     {
         aleatorio = new Random();
-        responses = new ArrayList<>();
+        coincident1 = new HashSet();
+        coincident2 = new HashSet();
         responsesOfImput = new HashMap<>();
+        responses = new ArrayList<>();
+        
+        coincident1.add("crash");
+        coincident1.add("problem");
+        coincident1.add("linux");
+        coincident2.add("free");
+        coincident2.add("app");
+        
         responses.add("Que le esta ocurriendo");
         responses.add("Que problema tiene en su equipo");
         responses.add("Espere se esta arreglando");
         responses.add("El equipo se ha arreglado perfectamente");
-        responses.add("Muchas gracias por confiar en nosotros¡¡¡");
-
-        responsesOfImput.put("android","funciona perfectamente reinicie el sistema");
-        responsesOfImput.put("simbian" ,"el sistema operativo se ha caido... reparando");
-        responsesOfImput.put("windowsPhone" ,"el sistema se esta actualizando");
-        responsesOfImput.put("Ios" ,"el sistema se ha arreglado listo para usarse");
+        responses.add("Muchas gracias por confiar en nosotros");
+         
+        responsesOfImput.put(coincident1,"el problema esta en linux");
+        responsesOfImput.put(coincident2,"la aplicacion es gratis");
+        
     }
 
     /**
      * Generate a response.
      * @return   A string that should be displayed as the response
      */
-    public String generateResponse( HashSet <String> userInput)
+    public String generateResponse(HashSet <String> userInput)
     {
         String response = null;
-        Iterator <String> iterator = userInput.iterator();
-        boolean search = true;
-        while(iterator.hasNext() && search){
-            response = responsesOfImput.get(iterator.next());
-             if(response != null){
-                search = false;
-                }
-      
-        }
-        for(String element: userInput){
-            if(response == null){
-                response = responsesOfImput.get(element);
-               
-            }
-
-        }
-
+        response = responsesOfImput.get(userInput);
+        
         if(response == null){
-
             response = responses.get(aleatorio.nextInt(responses.size()));
         }
         return response;
